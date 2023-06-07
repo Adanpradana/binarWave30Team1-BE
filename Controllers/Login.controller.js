@@ -21,8 +21,16 @@ async function login(req, res) {
         .status(200)
         .json({ auth: false, message: "password doesnt match" });
     const token = jwt.sign(
-      { id: user.id, Username: user.Username },
+      {
+        id: user.id,
+        Username: user.Username,
+        Biodata: user.Biodata,
+        City: user.City,
+      },
       process.env.TOKEN,
+      {
+        expiresIn: "7d",
+      },
       (err, token) => {
         res.status(200).json({
           auth: true,
