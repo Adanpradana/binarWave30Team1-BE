@@ -25,3 +25,4 @@ model game {
   Game_url      String
   play_count    Int
 }
+
