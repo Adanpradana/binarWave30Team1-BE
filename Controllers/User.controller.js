@@ -81,7 +81,6 @@ async function updatePlayer(req, res, next) {
   try {
     const { id } = req.params;
     const { Email, Username, Password, Total_score, Biodata, City } = req.body;
-    const hashedPassword = await bcrypt.hash(Password, 12);
     //pastiin data yang dikirim objek/
     const updateData = await prisma.user.update({
       where: { id },
@@ -89,7 +88,6 @@ async function updatePlayer(req, res, next) {
         Email,
         Username,
         Total_score,
-        Password: hashedPassword,
         Biodata,
         City,
       },
