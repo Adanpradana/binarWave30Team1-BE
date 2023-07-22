@@ -89,7 +89,7 @@ async function updatePlayer(req, res, next) {
         Email,
         Username,
         Total_score,
-        hashedPassword,
+        Password: hashedPassword,
         Biodata,
         City,
       },
