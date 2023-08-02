@@ -1,4 +1,3 @@
-
 const cloudinary = require("cloudinary").v2;
 
 cloudinary.config({
@@ -9,7 +8,16 @@ cloudinary.config({
 
 const uploadImage = async (req, res) => {
   try {
-    res.status(200).json({ message: "success upload", data: req.file });
+    if (!req.file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
+    cloudinary.uploader.upload(req.file.path, (err, result) => {
+      if (err) {
+        console.error("Error uploading to Cloudinary:", err);
+        return res.status(500).json({ message: "Error uploading file" });
+      }
+      res.json({ message: "uppload success", imageUrl: result });
+    });
   } catch (error) {
     console.log(error);
   }
