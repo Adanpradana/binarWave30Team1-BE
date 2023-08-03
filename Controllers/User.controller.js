@@ -2,9 +2,9 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const bcrypt = require("bcrypt");
 
-// 1. fungsi create player / register - vincent
 const register = async (req, res) => {
-  const { Email, Username, Password, Total_score, Biodata, City } = req.body;
+  const { Email, Username, Password, Total_score, Biodata, City, image_url } =
+    req.body;
   try {
     const hashedPassword = await bcrypt.hash(Password, 12);
     const player = await prisma.user.create({
@@ -15,6 +15,7 @@ const register = async (req, res) => {
         Total_score,
         Biodata,
         City,
+        image_url,
       },
     });
     // validasi body kosong
@@ -38,7 +39,6 @@ const register = async (req, res) => {
   }
 };
 
-// 2. fungsi get player - auda
 async function getPlayers(req, res, next) {
   try {
     const players = await prisma.user.findMany();
@@ -57,7 +57,7 @@ async function getPlayers(req, res, next) {
     next(error);
   }
 }
-// 3. fungsi get player berdasarkan id - adan
+
 async function getPlayerById(req, res, next) {
   const { id } = req.params;
   try {
@@ -76,7 +76,7 @@ async function getPlayerById(req, res, next) {
     next(error); // notes res.status(500)
   }
 }
-// 4. fungsi update player - akmal
+
 async function updatePlayer(req, res, next) {
   try {
     const { id } = req.params;

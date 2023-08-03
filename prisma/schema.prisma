@@ -15,6 +15,7 @@ model user {
   Total_score Int
   Biodata     String
   City        String
+  image_url   String?
   history     historyGame[]
 }
 

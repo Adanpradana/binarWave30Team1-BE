@@ -16,10 +16,14 @@ const uploadImage = async (req, res) => {
         console.error("Error uploading to Cloudinary:", err);
         return res.status(500).json({ message: "Error uploading file" });
       }
-      res.json({ message: "uppload success", imageUrl: result });
+      res.status(200).json({
+        message: "upload success !",
+        imageUrl: result,
+      });
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ message: error.message });
   }
 };
-module.exports = uploadImage;
+
+module.exports = { uploadImage };
