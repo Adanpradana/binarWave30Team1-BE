@@ -6,7 +6,7 @@ const app = require("express");
 const dataImg = require("../Controllers/Upload.controller.js");
 const router = app.Router();
 const multer = require("multer");
-const upload = multer({ dest: "/upload" });
+const upload = multer({ dest: "/tmp" });
 
 router.use("/players", PlayerRouter);
 router.use("/games", GameRouter);
