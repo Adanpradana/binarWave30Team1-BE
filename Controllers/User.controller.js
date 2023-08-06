@@ -103,7 +103,26 @@ async function updatePlayer(req, res, next) {
   }
 }
 
-// 5, fungsi delete player - labib
+async function updateImage(req, res) {
+  const { id } = req.params;
+  try {
+    const { image_url } = req.body;
+    const update = await prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        image_url,
+      },
+    });
+    res.status(200).json({ message: "success change profile picture" });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+}
+
 async function deletePlayer(req, res, next) {
   const { id } = req.params;
   try {
@@ -127,4 +146,5 @@ module.exports = {
   deletePlayer,
   getPlayerById,
   register,
+  updateImage,
 };
