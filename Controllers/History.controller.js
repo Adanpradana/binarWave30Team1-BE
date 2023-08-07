@@ -39,7 +39,7 @@ const postHistory = async (req, res) => {
 };
 
 const getHistory = async (req, res) => {
-  const { user_id } = req.param;
+  const { user_id } = req.params;
   try {
     const getHistory = await prisma.historyGame.findMany({
       where: {
