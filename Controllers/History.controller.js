@@ -41,7 +41,7 @@ const postHistory = async (req, res) => {
 const getHistory = async (req, res) => {
   const { user_id } = req.params;
   try {
-    const getHistory = await prisma.historyGame.findMany({
+    const getHistory = await prisma.historyGame.findUnique({
       where: {
         user_id,
       },
