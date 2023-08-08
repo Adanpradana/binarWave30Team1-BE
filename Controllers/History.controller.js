@@ -44,7 +44,7 @@ const getHistory = async (req, res) => {
     return res.status(200).json({ message: "play the game to make history" });
   }
   try {
-    const getHistory = await prisma.historyGame.findUnique({
+    const getHistory = await prisma.historyGame.findMany({
       where: {
         user_id,
       },
